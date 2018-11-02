@@ -45,7 +45,7 @@ def get_project(year,start,end):
 			print("---- checked pdf url : ",downloadurl)
 			pdfTile = str(year) + '_' + str(i).zfill(5) + '.pdf'
 			wget.download(downloadurl,out = pdfTile)
-			print("---- pdf file downloaded : ",pdfTile)
+			print("\n---- pdf file downloaded : ",pdfTile)
 			# get file size (B)
 			fileSize = os.path.getsize(pdfTile)
 			print("---- checking file size : %d Kb "%(fileSize/1024))
