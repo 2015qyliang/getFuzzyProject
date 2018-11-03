@@ -4,7 +4,7 @@
 # Description:
 # 1) download papers from "Scientific Report"
 # 2) parsing pdf file and extract fuzzy projectNumber, related microbial community study
-# using deome: python get_FrontersMicrobiology.py 2018 1 1700
+# using deome: python getScientificReports_B.py 2017 1206 18356
 '''
 # version-A ---- This script
 # https://www.nature.com/articles/srep03569
