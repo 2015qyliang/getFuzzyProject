@@ -2,7 +2,7 @@
 # email: qyliang2017@gmail.com
 # time: 2018-11-03
 # Description:
-# 1) download papers from "Scientific Reportsvolume"
+# 1) download papers from "Scientific Report"
 # 2) parsing pdf file and extract fuzzy projectNumber, related microbial community study
 # using deome: python getScientificReports_A.py 2016 18408 39929
 '''
