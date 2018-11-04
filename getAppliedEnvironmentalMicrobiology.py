@@ -52,13 +52,13 @@ def get_project(year,start,end):
 		# check request URL
 		if checkRequest.status_code == 200:
 			searchPattern = '/content/' + volume + '/' + str(i) + '/'
-			pdfUrlList = re.findall("(%s.{9})"%searchPattern,checkRequest.text)
+			pdfUrlList = re.findall("(%s.{1,9})(\" class=\"highwire-cite-linked-title\")"%searchPattern,checkRequest.text)
 			print("---- check AEM_url status: ",checkRequest.status_code)
 			print("---- pdf urls number : ",len(pdfUrlList))
 			aemUrl = 'https://aem.asm.org'
 			for pdfurl in pdfUrlList:
-				pdfCheckRequest = requests.get(aemUrl + pdfurl)
-				print("---- check pdf_url status:",aemUrl + pdfurl,pdfCheckRequest.status_code)
+				pdfCheckRequest = requests.get(aemUrl + pdfurl[0])
+				print("---- check pdf_url status:",aemUrl + pdfurl[0],pdfCheckRequest.status_code)
 				hitStrFind = re.findall("([A|a]ccession n)(.{5,90}[P|E|D|S].{5,90})(\.</)",pdfCheckRequest.text)
 				print("---- accession searched :", hitStrFind)
 				if len(hitStrFind) != 0 and pdfCheckRequest.status_code == 200:
@@ -70,15 +70,15 @@ def get_project(year,start,end):
 							print("--*--*-- searched fuzzy projectStr : ",hitProject)
 							S16 = re.findall("(16S)",checkRequest.text)
 							if len(S16) != 0:
-								urlList = aemUrl + pdfurl + '\t' + str(hitProject) + '\t16S\n'
+								urlList = aemUrl + pdfurl[0] + '\t' + str(hitProject) + '\t16S\n'
 							else:
-								urlList = aemUrl + pdfurl + '\t' + str(hitProject) + '\t----\n'
+								urlList = aemUrl + pdfurl[0] + '\t' + str(hitProject) + '\t----\n'
 							print("---- writing : ",urlList)
 							open('get_papers_project.txt','a',encoding='utf-8').write(urlList)
 				else:
-					print("---- dont searched fuzzy project in ",aemUrl + pdfurl)
-					open('failed_log.txt','a',encoding='utf-8').write("failed until " + aemUrl + pdfurl + '\n')
-				open('run_list.txt', 'a',encoding='utf-8').write(aemUrl + pdfurl + '\n')
+					print("---- dont searched fuzzy project in ",aemUrl + pdfurl[0])
+					open('failed_log.txt','a',encoding='utf-8').write("failed until " + aemUrl + pdfurl[0] + '\n')
+				open('run_list.txt', 'a',encoding='utf-8').write(aemUrl + pdfurl[0] + '\n')
 				time.sleep(0.3)
 
 # try ... except ...
