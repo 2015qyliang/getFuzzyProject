@@ -32,7 +32,7 @@ def get_project():
 				print("---- accession searched :", hitStrFind)
 				if len(hitStrFind) != 0 and pdfCheckRequest.status_code == 200:
 					for hitstr in hitStrFind[0]:
-						hitProject = re.search("(\s[P|E|D|S].{5,15}[^\)])", hitstr)
+						hitProject = re.search("([P|E|D|S].{5,15}[^\)])", hitstr)
 						print("---- fuzzy projectStr : ",hitProject)
 						if str(hitProject) != 'None':
 							hitProject = hitProject.group(1)
