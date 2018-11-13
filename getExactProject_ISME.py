@@ -31,12 +31,12 @@ def get_project(start,end):
 			pdfUrlList = re.findall("(<a href=\")(/articles/.{4,19})(\" itemprop=\"url\" data-track)",checkRequest.text)
 			print("---- pdf urls number : ",len(pdfUrlList))
 			# print(pdfUrlList)
-			scireportUrl = 'https://www.nature.com'
+			ismetUrl = 'https://www.nature.com'
 			for pdfurl in pdfUrlList:
 				print("--------------------------------")
 				print("---- current pages:",str(i))
-				print("---- check pdf_url:",scireportUrl + pdfurl[1])
-				text = requests.get(scireportUrl + pdfurl[1]).text
+				print("---- check pdf_url:",ismetUrl + pdfurl[1])
+				text = requests.get(ismetUrl + pdfurl[1]).text
 				hitPrjList = re.findall("PRJ[N|E][A|B]\d{4,6}",text)
 				hitSRPList = re.findall("SRP[\d|\s]\d{4,6}",text)
 				hitSAMNList = re.findall("SAMN\d{6,9}",text)
@@ -48,10 +48,10 @@ def get_project(start,end):
 				S16 = re.search("\s16S\s",text)
 				if len(str(S16)) != 0:
 					print("**** seaerched string:",Prjstr,SRPstr,SAMNstr,SRXstr)
-					open('getExactProject.txt','a',encoding='utf-8').write(scireportUrl + pdfurl[1] + '\t' + Prjstr +  '\t' + SRPstr + '\t' + '16S' + 
+					open('getExactProject.txt','a',encoding='utf-8').write(ismetUrl + pdfurl[1] + '\t' + Prjstr +  '\t' + SRPstr + '\t' + '16S' + 
 						'\t' + SAMNstr + '-' + SRXstr + '\n')
 				else:
-					open('getExactProject.txt','a',encoding='utf-8').write(scireportUrl + pdfurl[1] + '\t' + Prjstr + '\t' + SRPstr + '\t' + '---' + 
+					open('getExactProject.txt','a',encoding='utf-8').write(ismetUrl + pdfurl[1] + '\t' + Prjstr + '\t' + SRPstr + '\t' + '---' + 
 						'\t' + SAMNstr + '-' + SRXstr + '\n')
 				time.sleep(0.3)
 
