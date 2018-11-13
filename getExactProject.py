@@ -2,9 +2,9 @@
 # email: qyliang2017@gmail.com
 # time: 2018-11-13
 # Description:
-# 1) download papers from "Nature Communications"
+# 1) download papers from "Sci Report"
 # 2) parsing pdf file and extract fuzzy projectNumber, related microbial community study
-# using deome: python getSciReport.py -s 1 -e 420
+# using deome: python getExactProject.py -s 1 -e 1579
 
 import requests
 import re
@@ -12,7 +12,7 @@ import wget
 import time
 import argparse
 
-# pages 1 - 420
+# pages 1 -1579
 
 # parse argument
 parser = argparse.ArgumentParser()
@@ -23,7 +23,7 @@ args = parser.parse_args()
 # define main function
 def get_project(start,end):
 	for i in range(int(start),int(end)):
-		PdfListUrl = 'https://www.nature.com/ncomms/articles?searchType=journalSearch&sort=PubDate&type=article&page=' + str(i)
+		PdfListUrl = 'https://www.nature.com/srep/articles?searchType=journalSearch&sort=PubDate&type=article&page=' + str(i)
 		checkRequest = requests.get(PdfListUrl)
 		print("-----------"*6)
 		# check request URL
